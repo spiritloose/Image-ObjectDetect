@@ -6,22 +6,36 @@ SYNOPSIS
 
       my $cascade = 'haarcascade_frontalface_alt2.xml';
       my $file = 'picture.jpg';
-      my @faces = Image::ObjectDetect::detect($cascade, $file);
+      my @faces = detect_objects($cascade, $file);
       for my $face (@faces) {
-          print $face->{x};
-          print $face->{y};
-          print $face->{width};
+          print $face->{x}, "\n";
+          print $face->{y}, "\n";
+          print $face->{width}, "\n";
           print $face->{height}, "\n";
       }
+      # or OO interface
+      my $detector = Image::ObjectDetect->new($cascade);
+      @faces = $detector->detect($file);
 
 DESCRIPTION
     Image::ObjectDetect is a simple module to detect objects from picture
-    using opencv. It is available at:
-    http://sourceforge.net/projects/opencvlibrary/
+    using opencv.
+
+    It is available at: http://sourceforge.net/projects/opencvlibrary/
+
+METHODS
+    new($cascade)
+        Returns an instance of this module.
+
+    detect($file)
+        Detects objects from picture.
 
 FUNCTIONS
-    detect($cascade, $file)
+    detect_objects($cascade, $file)
         Detects objects from picture.
+
+EXPORT
+    detect_objects
 
 AUTHOR
     Jiro Nishiguchi <jiro@cpan.org>

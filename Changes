@@ -1,5 +1,10 @@
 Revision history for Perl Extention Image::ObjectDetect
 
+0.10 Thu Mar 08 13:01:02 JST 2007
+	- Changed name detect -> detect_objects
+	- Implemented OO interface.
+	- Fixed memory leaks.
+
 0.02 Thu Mar 08 10:49:22 JST 2007
 	- oops, missed a file to upload.
 

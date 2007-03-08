@@ -4,7 +4,7 @@ use warnings;
 use vars qw($VERSION @ISA @EXPORT);
 
 BEGIN {
-    $VERSION = '0.02';
+    $VERSION = '0.10';
     if ($] > 5.006) {
         require XSLoader;
         XSLoader::load(__PACKAGE__, $VERSION);
@@ -13,12 +13,19 @@ BEGIN {
         @ISA = qw(DynaLoader);
         __PACKAGE__->bootstrap;
     }
+    require Exporter;
+    push @ISA, 'Exporter';
+    @EXPORT = qw(detect_objects);
 }
 
-sub detect($$) {
-    my ($cascade, $file) = @_;
-    my $ret = xs_detect($cascade, $file);
+sub detect {
+    my ($self, $file) = @_;
+    my $ret = $self->xs_detect($file);
     wantarray ? @$ret : $ret;
+}
+
+sub detect_objects {
+    __PACKAGE__->new($_[0])->detect($_[1]);
 }
 
 1;
@@ -34,28 +41,50 @@ Image::ObjectDetect - detects objects from picture(using opencv)
 
   my $cascade = 'haarcascade_frontalface_alt2.xml';
   my $file = 'picture.jpg';
-  my @faces = Image::ObjectDetect::detect($cascade, $file);
+  my @faces = detect_objects($cascade, $file);
   for my $face (@faces) {
-      print $face->{x};
-      print $face->{y};
-      print $face->{width};
+      print $face->{x}, "\n";
+      print $face->{y}, "\n";
+      print $face->{width}, "\n";
       print $face->{height}, "\n";
   }
+  # or OO interface
+  my $detector = Image::ObjectDetect->new($cascade);
+  @faces = $detector->detect($file);
 
 =head1 DESCRIPTION
 
 Image::ObjectDetect is a simple module to detect objects from picture using opencv.
+
 It is available at: http://sourceforge.net/projects/opencvlibrary/
+
+=head1 METHODS
+
+=over 4
+
+=item new($cascade)
+
+Returns an instance of this module.
+
+=item detect($file)
+
+Detects objects from picture.
+
+=back
 
 =head1 FUNCTIONS
 
 =over 4
 
-=item detect($cascade, $file)
+=item detect_objects($cascade, $file)
 
 Detects objects from picture.
 
 =back
+
+=head1 EXPORT
+
+detect_objects
 
 =head1 AUTHOR
 

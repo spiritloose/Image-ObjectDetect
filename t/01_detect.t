@@ -14,9 +14,9 @@ if (exists $ENV{CASCADE_NAME}) {
         exit;
     }
 }
-plan tests => 5;
+plan tests => 7;
 
-my @faces = Image::ObjectDetect::detect($cascade, 't/test.jpg');
+my @faces = detect_objects($cascade, 't/test.jpg');
 is(scalar @faces, 5); # 5 persons
 
 my $face = shift @faces;
@@ -24,4 +24,9 @@ ok(exists $face->{x});
 ok(exists $face->{y});
 ok(exists $face->{width});
 ok(exists $face->{height});
+
+# OO interface
+my $detector = Image::ObjectDetect->new($cascade);
+isa_ok($detector, 'Image::ObjectDetect');
+ok($detector->detect('t/test.jpg'));
 
