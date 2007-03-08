@@ -6,16 +6,16 @@ SYNOPSIS
 
       my $cascade = 'haarcascade_frontalface_alt2.xml';
       my $file = 'picture.jpg';
-      my @faces = detect_objects($cascade, $file);
+      my $detector = Image::ObjectDetect->new($cascade);
+      @faces = $detector->detect($file);
       for my $face (@faces) {
           print $face->{x}, "\n";
           print $face->{y}, "\n";
           print $face->{width}, "\n";
           print $face->{height}, "\n";
       }
-      # or OO interface
-      my $detector = Image::ObjectDetect->new($cascade);
-      @faces = $detector->detect($file);
+      # or just like this
+      my @faces = detect_objects($cascade, $file);
 
 DESCRIPTION
     Image::ObjectDetect is a simple module to detect objects from picture

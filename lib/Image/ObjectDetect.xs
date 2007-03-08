@@ -34,7 +34,7 @@ xs_detect(self, filename)
         SV *self;
         char *filename;
     PREINIT:
-        IplImage *img, *gray, *small_img;
+        IplImage *img, *gray;
         int i;
         CvMemStorage *storage;
         CvHaarClassifierCascade *cascade;

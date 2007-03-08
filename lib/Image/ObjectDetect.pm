@@ -4,7 +4,7 @@ use warnings;
 use vars qw($VERSION @ISA @EXPORT);
 
 BEGIN {
-    $VERSION = '0.10';
+    $VERSION = '0.11';
     if ($] > 5.006) {
         require XSLoader;
         XSLoader::load(__PACKAGE__, $VERSION);
@@ -41,16 +41,16 @@ Image::ObjectDetect - detects objects from picture(using opencv)
 
   my $cascade = 'haarcascade_frontalface_alt2.xml';
   my $file = 'picture.jpg';
-  my @faces = detect_objects($cascade, $file);
+  my $detector = Image::ObjectDetect->new($cascade);
+  @faces = $detector->detect($file);
   for my $face (@faces) {
       print $face->{x}, "\n";
       print $face->{y}, "\n";
       print $face->{width}, "\n";
       print $face->{height}, "\n";
   }
-  # or OO interface
-  my $detector = Image::ObjectDetect->new($cascade);
-  @faces = $detector->detect($file);
+  # or just like this
+  my @faces = detect_objects($cascade, $file);
 
 =head1 DESCRIPTION
 

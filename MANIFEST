@@ -3,6 +3,7 @@ MANIFEST
 META.yml # Will be created by "make dist"
 Makefile.PL
 README
+eg/facedetect.pl
 lib/Image/ObjectDetect.pm
 lib/Image/ObjectDetect.xs
 src/ppport.h

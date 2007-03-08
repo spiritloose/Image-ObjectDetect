@@ -1,5 +1,9 @@
 Revision history for Perl Extention Image::ObjectDetect
 
+0.11 Fri Mar 09 00:13:58 JST 2007
+	- Added a sample script(eg/facedetect.pl)
+	- Refactored slightly.
+
 0.10 Thu Mar 08 13:01:02 JST 2007
 	- Changed name detect -> detect_objects
 	- Implemented OO interface.
