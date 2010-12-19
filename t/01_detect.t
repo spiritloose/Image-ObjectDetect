@@ -10,7 +10,7 @@ if (exists $ENV{CASCADE_NAME}) {
 } else {
     $cascade = '/usr/local/share/opencv/haarcascades/haarcascade_frontalface_alt2.xml';
     unless (-f $cascade) {
-        Test::More->import(skip_all => "no username and password set, skipped.");
+        Test::More->import(skip_all => "no cascade file found, skipped.");
         exit;
     }
 }
