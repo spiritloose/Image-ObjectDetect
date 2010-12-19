@@ -54,7 +54,11 @@ xs_detect(self, filename)
         storage = cvCreateMemStorage(0);
         cascade = INT2PTR(CvHaarClassifierCascade *, SvIV(SvRV(self)));
         objects = cvHaarDetectObjects(gray, cascade, storage,
+#if (CV_MAJOR_VERSION < 2 || (CV_MAJOR_VERSION == 2 && CV_MINOR_VERSION < 1))
                 1.1, 2, CV_HAAR_DO_CANNY_PRUNING, cvSize(0, 0));
+#else
+                1.1, 2, CV_HAAR_DO_CANNY_PRUNING, cvSize(0, 0), cvSize(0, 0));
+#endif
 
         retval = newAV();
         for (i = 0; i < (objects ? objects->total : 0); i++) {
