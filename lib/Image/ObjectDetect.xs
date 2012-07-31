@@ -4,8 +4,15 @@
 #define NEED_newRV_noinc
 #define NEED_sv_2pv_nolen
 #include "ppport.h"
+#ifdef OPENCV2
+#include <opencv2/core/core_c.h>
+#include <opencv2/highgui/highgui_c.h>
+#include <opencv2/imgproc/types_c.h>
+#include <opencv2/objdetect/objdetect.hpp>
+#else
 #include "cv.h"
 #include "highgui.h"
+#endif
 
 MODULE = Image::ObjectDetect		PACKAGE = Image::ObjectDetect
 
